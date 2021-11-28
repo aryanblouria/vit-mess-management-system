@@ -62,7 +62,7 @@ START:
     	INT 1AH      ; CX:DX now hold number of clock ticks since midnight      
     	mov ax, dx
     	xor dx, dx
-    	mov cx, 70    
+    	mov cx, 70   ;0-70 students for the first slot  
     	div cx       ; here dx contains the remainder of the division - from 0 to 9       
     	MOV CX,DX                                                                         
 
@@ -75,7 +75,7 @@ START:
     	INT 1AH      ; CX:DX now hold number of clock ticks since midnight      
     	mov ax, dx
     	xor dx, dx
-    	mov cx, 60    
+    	mov cx, 60   ;0-60 students for second slot 
     	div cx       ; here dx contains the remainder of the division - from 0 to 9       
     	MOV CX,DX                                                                         
 
@@ -88,7 +88,7 @@ START:
     	INT 1AH      ; CX:DX now hold number of clock ticks since midnight      
     	mov ax, dx
     	xor dx, dx
-    	mov cx, 50    
+    	mov cx, 50   ;0-50 students for second slot  
     	div cx       ; here dx contains the remainder of the division - from 0 to 9       
     	MOV CX,DX                                                                         
 
@@ -100,15 +100,15 @@ MENU:
 		MOV DS, AX
 		MOV AH, 9
 		MOV DX, OFFSET WELCOME
-		INT 21H;Print NOTICE
+		INT 21H;Print WELCOME
 		MOV DX, OFFSET NOTICE
 		INT 21H;Print NOTICE  
 		MOV DX, OFFSET NOTICEa
-		INT 21H;Print NOTICE 
+		INT 21H;Print NOTICEa 
 		MOV DX, OFFSET NOTICEb
-		INT 21H;Print NOTICE
+		INT 21H;Print NOTICEb
 		MOV DX, OFFSET NOTICEc
-		INT 21H;Print NOTICE
+		INT 21H;Print NOTICEc
 		MOV DX, OFFSET NOTICEd
 		INT 21H;Print NOTICEd
 
@@ -152,7 +152,6 @@ DEFAULT:
 		MOV AH, 9
 		MOV DX, OFFSET ERR
 		INT 21H
-		;CALL DEBUG
 		JMP MENU
 
 ;ENTER DATA
@@ -860,7 +859,6 @@ SHOWLAST PROC NEAR
 		RET
 SHOWLAST ENDP
 
-
 ;FUNCTION TO PRINT FORM THE STARTING OF THE NEXT LINE
 CRLF PROC NEAR
 	PUSH AX
@@ -887,67 +885,5 @@ SPACE PROC NEAR
 	RET
 SPACE ENDP
 
-DEBUG PROC NEAR
-	PUSH AX
-	PUSH BX
-	PUSH CX
-	PUSH DX
-	PUSH SI
-	MOV CX, NUMBER
-	MOV BX, NAME_BEGIN
-	XOR SI, SI
-NAMELP:
-	ADD BX, SI
-	MOV DX, BX
-	MOV AH, 9
-	INT 21H
-	CALL SPACE
-	ADD SI, WORD PTR  TYPE_NAME
-	LOOP NAMELP
-
-	MOV CX, NUMBER
-	XOR SI, SI
-CLASSLP:
-	MOV AX, TIME_ARR[SI]
-	CALL DECOUT
-	ADD SI, 2
-	LOOP CLASSLP
-
-	MOV CX, NUMBER
-	XOR SI, SI
-IDLP:
-	MOV AX, ROOM_ARR[SI]
-	CALL DECOUT
-	ADD SI, 2
-	LOOP IDLP
-
-	MOV CX, NUMBER
-	XOR SI, SI
-SCORELP:
-	MOV AX, TIME_ARR[SI]
-	CALL YEAROUT
-	ADD SI, 2
-	LOOP SCORELP
-
-	POP SI
-	POP DX
-	POP CX
-	POP BX
-	POP AX
-	RET
-DEBUG ENDP
-TAG PROC NEAR
-	PUSH AX
-	PUSH DX
-
-	MOV DL, '!'
-	MOV AH, 2
-	INT 21H
-	
-
-	POP DX
-	POP AX
-	RET
-TAG ENDP
 CODE ENDS
 	 END START
