@@ -1,4 +1,4 @@
-# CSE2006 Microprocessors and Interfacing J comp
+# CSE2006 Microprocessors and Interfacing
 
 ## Team Members
 <li>Arohan Mishra - 19BCE0270</li>
