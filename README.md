@@ -21,4 +21,3 @@ Due to unforeseen reasons, if some students are not able to go to the mess for a
 <a href="https://github.com/arohan-mishra/micro_jcomp/graphs/contributors">
   <img src="https://contrib.rocks/image?repo=arohan-mishra/micro_jcomp" />
 </a>
-
